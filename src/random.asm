@@ -3,6 +3,16 @@ RandomBag: ds 7
 BagIndex: db
 Seed: dw
 
+SECTION "RandomCode", ROM0
+
+; Export symbols
+EXPORT RandomBag
+EXPORT BagIndex
+EXPORT Seed
+EXPORT InitRandom
+EXPORT RefillBag
+EXPORT RandomByte
+
 InitRandom:
     ; Initialize seed with DIV register
     ld hl, Seed
@@ -46,4 +56,36 @@ RefillBag:
     jr nz, .shuffle
     xor a
     ld [BagIndex], a
+    ret
+
+RandomByte:
+    ; Simple LFSR random number generator
+    ld hl, Seed
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    
+    ; LFSR: if bit 0 is set, XOR with 0xB400
+    bit 0, l
+    jr z, .noXor
+    ld a, h
+    xor $B4
+    ld h, a
+    ld a, l
+    xor $00
+    ld l, a
+.noXor:
+    
+    ; Shift right
+    srl h
+    rr l
+    
+    ; Store back
+    ld a, l
+    ld [Seed], a
+    ld a, h
+    ld [Seed+1], a
+    
+    ; Return random byte
+    ld a, l
     ret

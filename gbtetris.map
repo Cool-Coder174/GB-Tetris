@@ -1,0 +1,88 @@
+SUMMARY:
+	ROM0: 1071 bytes used / 15313 free
+	WRAM0: 223 bytes used / 3873 free
+
+ROM0 bank #0:
+	SECTION: $0000-$00df ($00e0 bytes) ["TetrominoData"]
+	         $0000 = TETROMINO_DEFS
+	SECTION: $00e0-$00ff ($0020 bytes) ["TileData"]
+	         $00e0 = TileData
+	         $0100 = TileDataEnd
+	SECTION: $0100-$014f ($0050 bytes) ["Header"]
+	SECTION: $0150-$02ed ($019e bytes) ["Main"]
+	         $0150 = EntryPoint
+	         $0166 = MainLoop
+	         $0177 = LCDOff
+	         $017e = LCDOn
+	         $0185 = WaitVBlank
+	         $018c = LoadGraphics
+	         $0199 = CopyData
+	         $01a2 = InitPlayfield
+	         $01ad = FillMemory
+	         $01b4 = SpawnNewPiece
+	         $01c9 = GetNextPiece
+	         $01d4 = GetNextPiece.getFromBag
+	         $01e1 = ReadJoypad
+	         $0212 = ProcessInput
+	         $0226 = ProcessInput.moveRight
+	         $023d = ProcessInput.moveLeft
+	         $0254 = ProcessInput.moveDown
+	         $026b = ProcessInput.rotate
+	         $0283 = ProcessInput.end
+	         $0284 = HandleGravity
+	         $02aa = HandleGravity.placePiece
+	         $02b4 = HandleGravity.end
+	         $02b5 = PlacePiece
+	         $02c9 = PlacePiece.placeBlock
+	         $02e1 = GetPlayfieldIndex
+	         $02e6 = GetPlayfieldIndex.multiply
+	         $02ec = ClearLines
+	         $02ed = UpdateDisplay
+	SECTION: $02ee-$0347 ($005a bytes) ["RandomCode"]
+	         $02ee = InitRandom
+	         $02fb = RefillBag
+	         $0300 = RefillBag.fill
+	         $030c = RefillBag.shuffle
+	         $0328 = RandomByte
+	         $033a = RandomByte.noXor
+	SECTION: $0348-$0387 ($0040 bytes) ["GraphicsData"]
+	         $0348 = BGPalettes
+	SECTION: $0388-$03c4 ($003d bytes) ["GraphicsInit"]
+	         $0388 = InitDisplay
+	         $0396 = DrawPlayfield
+	         $039f = DrawPlayfield.drawLoop
+	         $03a8 = DrawCurrentPiece
+	         $03bc = DrawCurrentPiece.drawBlock
+	SECTION: $03c5-$03f2 ($002e bytes) ["LogicCode"]
+	         $03c5 = CheckCollision
+	         $03cd = CheckCollision.checkBlock
+	         $03f1 = CheckCollision.collision
+	SECTION: $03f3-$0419 ($0027 bytes) ["TetrominoCode"]
+	         $03f3 = GetRotationData
+	SECTION: $041a-$042e ($0015 bytes) ["GraphicsCode"]
+	         $041a = InitCGB
+	         $0428 = InitCGB.loadBGPal
+	EMPTY: $042f-$3fff ($3bd1 bytes)
+	TOTAL EMPTY: $3bd1 bytes
+
+WRAM0 bank #0:
+	SECTION: $c000-$c0d4 ($00d5 bytes) ["GameState"]
+	         $c000 = CurrentPieceType
+	         $c001 = CurrentPieceX
+	         $c002 = CurrentPieceY
+	         $c003 = CurrentPieceRotation
+	         $c004 = Playfield
+	         $c0cc = GravityCounter
+	         $c0cd = MoveCounter
+	         $c0ce = GameState
+	         $c0cf = Score
+	         $c0d1 = Lines
+	         $c0d2 = Level
+	         $c0d3 = JoypadState
+	         $c0d4 = JoypadPressed
+	SECTION: $c0d5-$c0de ($000a bytes) ["RNG"]
+	         $c0d5 = RandomBag
+	         $c0dc = BagIndex
+	         $c0dd = Seed
+	EMPTY: $c0df-$cfff ($0f21 bytes)
+	TOTAL EMPTY: $0f21 bytes
